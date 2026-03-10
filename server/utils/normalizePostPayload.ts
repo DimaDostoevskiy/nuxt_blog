@@ -50,6 +50,8 @@ export default function (payload: any, isCreate: boolean = false): PostModel {
         }
     }
 
+    console.log(payload)
+
     // Валидация всех полей
     const result = PostSchema.safeParse(payload)
 
