@@ -60,7 +60,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <LayoutDefaultSection :title="'Создать пост'">
+  <LayoutDefaultSection :title="'Редактировать пост'">
     <template #section-controls>
       <NuxtLink :to="'/admin/post/'"
                 class="link-btn link-btn--outline"
