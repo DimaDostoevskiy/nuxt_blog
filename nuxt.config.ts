@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     },
 
     compatibilityDate: '2026-01-01',
-
     css: ['~/assets/styles/main.css'],
 
     app: {
@@ -74,5 +73,7 @@ export default defineNuxtConfig({
 
         // Компрессия
         compressPublicAssets: true,
-    }
+    },
+
+    modules: ['@nuxt/image']
 })
