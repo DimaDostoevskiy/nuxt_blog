@@ -1,7 +1,7 @@
 <template>
   <NuxtImg class="kit-image"
            fit="cover"
-           :src="isError ? imageSrc : defaultImage"
+           :src="isError ? defaultImage : path"
            :alt="alt"
            :loading="loading"
            @error="handleError"
@@ -29,14 +29,12 @@ const props = defineProps({
 })
 
 const isError = ref(false)
-const imageSrc = ref(props.path)
 
 const handleError = () => {
   isError.value = true
 }
 
-watch(() => (props.path), (newPath) => {
-  imageSrc.value = newPath
+watch(() => props.path, () => {
   isError.value = false
 })
 </script>
