@@ -8,20 +8,22 @@ defineProps({
   },
 })
 
-const show = ref(false)
+const isShow = ref(false)
 </script>
 
 <template>
   <div class="kit-tooltip"
-       @mouseenter="show = true"
-       @mouseleave="show = false"
+       @mouseenter="isShow = true"
+       @mouseleave="isShow = false"
   >
     <slot name="trigger"/>
-    <div v-show="show"
+    <div v-show="isShow"
          class="kit-tooltip__popup"
          :class="`kit-tooltip__popup_${position}`"
     >
-      <p v-if="text" class="kit-tooltip__text">{{ text }}</p>
+      <p v-if="text"
+         class="kit-tooltip__text"
+      >{{ text }}</p>
       <slot name="content"/>
     </div>
   </div>
