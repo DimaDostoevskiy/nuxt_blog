@@ -7,6 +7,7 @@ export interface IListPostsParams {
     limit?: number
     offset?: number
     q?: string
+    publishedOnly?: boolean
 }
 
 const DEFAULT_LIMIT = 10
@@ -37,21 +38,37 @@ export const postsService = {
     searchPost: async (params: IListPostsParams) => {
         const limit = Number(params.limit) || DEFAULT_LIMIT
         const offset = Number(params.offset) || 0
-        const searchString = (params.q ?? '').toString().trim().replace(/[^a-zA-Z0-9]/g, '')
+        const publishedOnly = params.publishedOnly
+        const searchString = (params.q ?? '').toString().trim().replace(/[%_\\]/g, '\\$&')
 
-        return PostModel
-            .findAll({
-                where: {
-                    title: {[Op.like]: `%${searchString}%`},
-                    description: {[Op.like]: `%${searchString}%`},
-                    content: {[Op.like]: `%${searchString}%`},
-                    published: true
-                },
+        if (!searchString) {
+            const where = publishedOnly ? {published: true} : {}
+            return PostModel.findAll({
+                where,
                 order: [['createdAt', 'DESC']],
                 limit,
                 offset,
-            })
-            .then((list) => list.map((p) => p.get({plain: true})))
+            }).then((list) => list.map((p) => p.get({plain: true})))
+        }
+
+        const likePattern = `%${searchString}%`
+        const orMatch = {
+            [Op.or]: [
+                {title: {[Op.like]: likePattern}},
+                {description: {[Op.like]: likePattern}},
+                {content: {[Op.like]: likePattern}},
+            ],
+        }
+        const where = publishedOnly
+            ? {[Op.and]: [{published: true}, orMatch]}
+            : orMatch
+
+        return PostModel.findAll({
+            where,
+            order: [['createdAt', 'DESC']],
+            limit,
+            offset,
+        }).then((list) => list.map((p) => p.get({plain: true})))
     }
     ,
 

@@ -1,4 +1,7 @@
 import {defineEventHandler} from 'h3'
-import {postsService} from '../../services/postsService'
+import {IListPostsParams, postsService} from '../../services/postsService'
 
-export default defineEventHandler(async () => await postsService.getAllPosts())
+export default defineEventHandler(async (event) => {
+    const query = getQuery(event) as IListPostsParams
+    return await postsService.searchPost(query)
+})

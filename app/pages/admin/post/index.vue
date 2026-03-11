@@ -9,7 +9,9 @@ useSeoMeta({
   title: 'Админка',
 })
 
-const {data: posts, pending, error: fetchError, refresh} = await useFetch<BlogPost[]>('/api/posts/get-all')
+const {data: posts, pending, error: fetchError, refresh} = await useFetch<BlogPost[]>('/api/posts/get-all', {
+  query: {published: 'all'},
+})
 
 const removePost = async (id: number) => {
   if (!confirm('Удалить пост?')) {
@@ -27,9 +29,9 @@ const removePost = async (id: number) => {
 <template>
   <LayoutDefaultSection :title="'Управление постами'">
     <template #section-controls>
-      <nuxt-link class="link-btn link-btn_outline"
+      <nuxt-link class="link-btn link-btn_primary"
                  :to="`/admin/post/create`"
-      >Создать новый пост
+      >Создать
       </nuxt-link>
     </template>
     <template #section-content>
