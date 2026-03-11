@@ -15,7 +15,7 @@ interface IFetchDeepSeekResponse {
 
 export default () => {
     const parseResponse = (data: IAiGenerateSuccess): object => {
-        let content = data.choices[0]?.message.content
+        const content = data.choices[0]?.message.content
         if (content) {
             return JSON.parse(content.replace(/<think>[\s\S]*?<\/think>/g, '').trim())
         } else {
@@ -43,7 +43,7 @@ export default () => {
                 }
 
             }
-        } catch (err) {
+        } catch {
             return {
                 message: 'Ошибка при создании поста',
                 result: null

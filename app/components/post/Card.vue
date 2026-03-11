@@ -1,24 +1,3 @@
-<template>
-  <div class="post-card">
-    <div class="post-card__media">
-      <img
-          v-if="displayImageSrc && !isImageBroken"
-          class="post-card__media-image"
-          :src="displayImageSrc"
-          :alt="`Изображение к посту: ${post.title}`"
-          loading="lazy"
-          @error="handleImageError"
-      />
-      <div v-else class="post-card__media-fallback">Нет изображения</div>
-      <a class="post-card__link" :href="postHref">Перейти на страницу</a>
-    </div>
-    <div class="post-card__body">
-      <h2 class="post-card__title">{{ post.title }}</h2>
-      <p class="post-card__description">{{ post.description }}</p>
-      <div class="post-card__content" v-html="post.content"/>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
 import type {BlogPost} from '~/types/blog'
 
@@ -57,6 +36,27 @@ function handleImageError() {
   isImageBroken.value = true
 }
 </script>
+<template>
+  <div class="post-card">
+    <div class="post-card__media">
+      <img
+          v-if="displayImageSrc && !isImageBroken"
+          class="post-card__media-image"
+          :src="displayImageSrc"
+          :alt="`Изображение к посту: ${post.title}`"
+          loading="lazy"
+          @error="handleImageError"
+      />
+      <div v-else class="post-card__media-fallback">Нет изображения</div>
+      <a class="post-card__link" :href="postHref">Перейти на страницу</a>
+    </div>
+    <div class="post-card__body">
+      <h2 class="post-card__title">{{ post.title }}</h2>
+      <p class="post-card__description">{{ post.description }}</p>
+      <div class="post-card__content" v-html="post.content"/>
+    </div>
+  </div>
+</template>
 
 
 <style scoped>

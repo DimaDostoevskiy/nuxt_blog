@@ -1,3 +1,13 @@
+<script setup lang="ts">
+definePageMeta({
+  middleware: ['auth'],
+})
+
+useSeoMeta({
+  title: 'Admin — Pro Moto Blog',
+})
+</script>
+
 <template>
   <LayoutDefaultSection :title="'Панель администратора'">
     <template #section-content>
@@ -16,16 +26,6 @@
 
 
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-  middleware: ['auth'],
-})
-
-useSeoMeta({
-  title: 'Admin — Pro Moto Blog',
-})
-</script>
 
 <style scoped>
 .admin-page__card {

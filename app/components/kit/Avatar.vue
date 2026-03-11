@@ -1,21 +1,3 @@
-<template>
-  <div class="kit-avatar"
-       :class="{
-      'kit-avatar_sm': size === 'sm',
-      'kit-avatar_md': size === 'md',
-      'kit-avatar_lg': size === 'lg',
-      'kit-avatar_xl': size === 'xl'
-    }"
-       @click="$emit('click', $event)"
-  >
-    <img v-if="src"
-         class="kit-avatar__image"
-         :src="src"
-         :alt="alt"
-    />
-  </div>
-</template>
-
 <script setup>
 defineProps({
   src: {type: String, default: `https://motodart.pro/files/avatar.jpg`},
@@ -25,6 +7,24 @@ defineProps({
 
 defineEmits(['click'])
 </script>
+
+<template>
+  <div class="kit-avatar"
+       :class="{
+             'kit-avatar_sm': size === 'sm',
+             'kit-avatar_md': size === 'md',
+             'kit-avatar_lg': size === 'lg',
+             'kit-avatar_xl': size === 'xl'
+         }"
+       @click="$emit('click', $event)"
+  >
+    <img v-if="src"
+         class="kit-avatar__image"
+         :src="src"
+         :alt="alt"
+    />
+  </div>
+</template>
 
 <style scoped>
 .kit-avatar {

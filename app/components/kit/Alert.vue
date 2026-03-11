@@ -1,30 +1,3 @@
-<template>
-  <div
-      class="kit-alert"
-      :class="`kit-alert_${props.type}`"
-      role="alert"
-  >
-    <div class="kit-alert__icon" aria-hidden="true">
-      {{ icon }}
-    </div>
-    <div class="kit-alert__body">
-      <h3
-          v-if="title"
-          class="kit-alert__title"
-      >
-        {{ title }}
-      </h3>
-      <p
-          v-if="text"
-          class="kit-alert__text"
-      >
-        {{ text }}
-      </p>
-      <slot/>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 const props = defineProps({
   title: {
@@ -55,6 +28,33 @@ const icon = computed(() => {
   }
 })
 </script>
+
+<template>
+  <div
+      class="kit-alert"
+      :class="`kit-alert_${props.type}`"
+      role="alert"
+  >
+    <div class="kit-alert__icon" aria-hidden="true">
+      {{ icon }}
+    </div>
+    <div class="kit-alert__body">
+      <h3
+          v-if="title"
+          class="kit-alert__title"
+      >
+        {{ title }}
+      </h3>
+      <p
+          v-if="text"
+          class="kit-alert__text"
+      >
+        {{ text }}
+      </p>
+      <slot/>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .kit-alert {

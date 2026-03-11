@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const {app: appConfig} = useRuntimeConfig()
+const baseUrl = appConfig.baseURL || '/blog/'
+</script>
+
 <template>
   <footer class="layout-footer">
     <div class="layout-footer__inner">
@@ -51,11 +56,6 @@
     </div>
   </footer>
 </template>
-
-<script setup lang="ts">
-const {app: appConfig} = useRuntimeConfig()
-const baseUrl = appConfig.baseURL || '/blog/'
-</script>
 
 <style scoped>
 .layout-footer {

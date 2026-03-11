@@ -1,82 +1,3 @@
-<template>
-  <div class="kit-input">
-    <template v-if="type === 'checkbox'">
-      <label class="kit-input__checkbox-wrap" :for="id">
-        <input
-            :id="id"
-            :name="name"
-            type="checkbox"
-            :checked="Boolean(modelValue)"
-            :disabled="disabled"
-            :readonly="readonly"
-            :required="required"
-            class="kit-input__checkbox"
-            @change="handleCheckboxChange"
-            @focus="$emit('focus')"
-            @blur="$emit('blur')"
-        />
-        <span v-if="label" class="kit-input__label kit-input__label_inline">
-          {{ label }}
-        </span>
-      </label>
-    </template>
-
-    <template v-else>
-      <label v-if="label"
-             :for="id"
-             class="kit-input__label"
-      >{{ label }}</label>
-      <textarea v-if="as === 'textarea'"
-                :value="modelValue"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :readonly="readonly"
-                :required="required"
-                :name="name"
-                :id="id"
-                :rows="rows"
-                class="kit-input__field kit-input__field_textarea"
-                :class="{
-                     'kit-input__field_error': error,
-                     'kit-input__field_success': success,
-                     'kit-input__field_disabled': disabled,
-                     'kit-input__field_lg': size === 'lg',
-                     'kit-input__field_sm': size === 'sm'
-                }"
-                v-bind="$attrs"
-                @input="handleInput"
-                @focus="$emit('focus')"
-                @blur="$emit('blur')"
-      />
-      <input v-else
-             :type="type"
-             :value="modelValue"
-             :placeholder="placeholder"
-             :disabled="disabled"
-             :readonly="readonly"
-             :required="required"
-             :name="name"
-             :id="id"
-             class="kit-input__field"
-             :class="{
-          'kit-input__field_error': error,
-          'kit-input__field_success': success,
-          'kit-input__field_disabled': disabled,
-          'kit-input__field_lg': size === 'lg',
-          'kit-input__field_sm': size === 'sm'
-        }"
-             v-bind="$attrs"
-             @input="handleInput"
-             @focus="$emit('focus')"
-             @blur="$emit('blur')"
-             @keyup.enter="$emit('enter')"
-      />
-    </template>
-    <p v-if="error" class="kit-input__error">{{ error }}</p>
-    <p v-if="hint && !error" class="kit-input__hint">{{ hint }}</p>
-  </div>
-</template>
-
 <script setup>
 import {onBeforeUnmount} from 'vue'
 
@@ -129,6 +50,85 @@ onBeforeUnmount(() => {
   if (debounceTimer) clearTimeout(debounceTimer)
 })
 </script>
+
+<template>
+  <div class="kit-input">
+    <template v-if="type === 'checkbox'">
+      <label class="kit-input__checkbox-wrap" :for="id">
+        <input
+            :id="id"
+            :name="name"
+            type="checkbox"
+            :checked="Boolean(modelValue)"
+            :disabled="disabled"
+            :readonly="readonly"
+            :required="required"
+            class="kit-input__checkbox"
+            @change="handleCheckboxChange"
+            @focus="$emit('focus')"
+            @blur="$emit('blur')"
+        />
+        <span v-if="label" class="kit-input__label kit-input__label_inline">
+                    {{ label }}
+                </span>
+      </label>
+    </template>
+
+    <template v-else>
+      <label v-if="label"
+             :for="id"
+             class="kit-input__label"
+      >{{ label }}</label>
+      <textarea v-if="as === 'textarea'"
+                :value="modelValue"
+                :placeholder="placeholder"
+                :disabled="disabled"
+                :readonly="readonly"
+                :required="required"
+                :name="name"
+                :id="id"
+                :rows="rows"
+                class="kit-input__field kit-input__field_textarea"
+                :class="{
+                          'kit-input__field_error': error,
+                          'kit-input__field_success': success,
+                          'kit-input__field_disabled': disabled,
+                          'kit-input__field_lg': size === 'lg',
+                          'kit-input__field_sm': size === 'sm'
+                      }"
+                v-bind="$attrs"
+                @input="handleInput"
+                @focus="$emit('focus')"
+                @blur="$emit('blur')"
+      />
+      <input v-else
+             :type="type"
+             :value="modelValue"
+             :placeholder="placeholder"
+             :disabled="disabled"
+             :readonly="readonly"
+             :required="required"
+             :name="name"
+             :id="id"
+             class="kit-input__field"
+             :class="{
+                       'kit-input__field_error': error,
+                       'kit-input__field_success': success,
+                       'kit-input__field_disabled': disabled,
+                       'kit-input__field_lg': size === 'lg',
+                       'kit-input__field_sm': size === 'sm'
+                   }"
+             v-bind="$attrs"
+             @input="handleInput"
+             @focus="$emit('focus')"
+             @blur="$emit('blur')"
+             @keyup.enter="$emit('enter')"
+      />
+    </template>
+    <p v-if="error" class="kit-input__error">{{ error }}</p>
+    <p v-if="hint && !error" class="kit-input__hint">{{ hint }}</p>
+  </div>
+</template>
 
 <style scoped>
 .kit-input {

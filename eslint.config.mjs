@@ -73,7 +73,7 @@ export default [
 
             // Правила порядка (работающие в новых версиях)
             'vue/block-order': ['error', {
-                order: ['template', 'script', 'style']
+                order: ['script', 'template', 'style']
             }],
 
             'vue/attributes-order': ['off', {
@@ -110,6 +110,12 @@ export default [
                 multiline: 'ignore'   // Игнорировать в многострочных
             }],
 
+            'vue/html-indent': ['error', 4],
+            'vue/html-closing-bracket-spacing': ['error', {
+                startTag: 'never',
+                endTag: 'never',
+                selfClosingTag: 'never'
+            }],
             'vue/max-attributes-per-line': 'off', // Упрощаем форматирование
             'vue/singleline-html-element-content-newline': 'off',
             'vue/multiline-html-element-content-newline': 'off'

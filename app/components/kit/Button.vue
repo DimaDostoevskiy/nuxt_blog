@@ -83,8 +83,8 @@ const clickHandler = (e) => {
       <span v-if="(text || $slots.default) && !loading"
             class="kit-button__text"
       >
-        <slot>{{ text }}</slot>
-      </span>
+                <slot>{{ text }}</slot>
+            </span>
       <span v-if="iconRight && !loading"
             class="kit-button__icon kit-button__icon_right"
       >{{ iconRight }}</span>

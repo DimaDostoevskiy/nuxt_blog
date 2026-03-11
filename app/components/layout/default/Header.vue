@@ -1,19 +1,3 @@
-<template>
-  <header class="layout-header">
-    <a class="layout-header__logo" :href="baseUrl">Logo</a>
-    <div v-if="isHomePage" class="layout-header__search">
-      <KitInput placeholder="Поиск..." v-model="searchQuery"/>
-    </div>
-    <div class="layout-header__user">
-      <div class="layout-header__user-info">
-        <div class="layout-header__user-text">{{ user?.name || '' }}</div>
-        <div class="layout-header__user-text">{{ user?.role || '' }}</div>
-      </div>
-      <KitAvatar size="md"/>
-    </div>
-  </header>
-</template>
-
 <script setup lang="ts">
 import type {IUserCookie} from '../../../types/user'
 
@@ -43,6 +27,22 @@ onMounted(() => {
 })
 
 </script>
+
+<template>
+  <header class="layout-header">
+    <a class="layout-header__logo" :href="baseUrl">Logo</a>
+    <div v-if="isHomePage" class="layout-header__search">
+      <KitInput placeholder="Поиск..." v-model="searchQuery"/>
+    </div>
+    <div class="layout-header__user">
+      <div class="layout-header__user-info">
+        <div class="layout-header__user-text">{{ user?.name || '' }}</div>
+        <div class="layout-header__user-text">{{ user?.role || '' }}</div>
+      </div>
+      <KitAvatar size="md"/>
+    </div>
+  </header>
+</template>
 
 <style scoped>
 .layout-header {

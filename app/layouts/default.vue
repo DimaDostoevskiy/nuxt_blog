@@ -8,9 +8,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
-
 <style scoped>
 .layout {
   background: radial-gradient(

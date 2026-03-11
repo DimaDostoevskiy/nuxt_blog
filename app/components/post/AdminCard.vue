@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import type {BlogPost} from '~/types/blog'
+
+defineProps({
+  post: {
+    type: Object as () => BlogPost,
+    required: true
+  }
+})
+
+const isImageBroken = ref(false)
+
+const handleImageError = () => {
+  isImageBroken.value = true
+}
+</script>
+
 <template>
   <div class="admin-card">
     <div class="admin-card__media">
@@ -21,23 +38,6 @@
     </NuxtLink>
   </div>
 </template>
-
-<script setup lang="ts">
-import type {BlogPost} from '~/types/blog'
-
-defineProps({
-  post: {
-    type: Object as () => BlogPost,
-    required: true
-  }
-})
-
-const isImageBroken = ref(false)
-
-const handleImageError = () => {
-  isImageBroken.value = true
-}
-</script>
 
 <style scoped>
 .admin-card {

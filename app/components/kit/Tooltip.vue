@@ -1,3 +1,16 @@
+<script setup>
+defineProps({
+  text: {type: String, default: ''},
+  position: {
+    type: String,
+    default: 'bottom',
+    validator: (v) => ['top', 'bottom', 'left', 'right'].includes(v),
+  },
+})
+
+const show = ref(false)
+</script>
+
 <template>
   <div class="kit-tooltip"
        @mouseenter="show = true"
@@ -13,19 +26,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  text: {type: String, default: ''},
-  position: {
-    type: String,
-    default: 'bottom',
-    validator: (v) => ['top', 'bottom', 'left', 'right'].includes(v),
-  },
-})
-
-const show = ref(false)
-</script>
 
 <style scoped>
 .kit-tooltip {

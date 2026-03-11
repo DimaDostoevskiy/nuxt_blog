@@ -1,21 +1,3 @@
-<template>
-  <form class="kit-form"
-        submit-label=""
-        @submit.prevent="$emit('submit')"
-  >
-    <slot/>
-    <div v-if="submitLabel" class="kit-form__actions">
-      <KitButton
-          type="submit"
-          variant="primary"
-          :disabled="loading || submitDisabled"
-      >
-        {{ loading ? loadingText : submitLabel }}
-      </KitButton>
-    </div>
-  </form>
-</template>
-
 <script setup lang="ts">
 defineProps({
   submitLabel: {
@@ -40,6 +22,24 @@ defineEmits<{
   (e: 'submit'): void
 }>()
 </script>
+
+<template>
+  <form class="kit-form"
+        submit-label=""
+        @submit.prevent="$emit('submit')"
+  >
+    <slot/>
+    <div v-if="submitLabel" class="kit-form__actions">
+      <KitButton
+          type="submit"
+          variant="primary"
+          :disabled="loading || submitDisabled"
+      >
+        {{ loading ? loadingText : submitLabel }}
+      </KitButton>
+    </div>
+  </form>
+</template>
 
 <style scoped>
 .kit-form {

@@ -1,63 +1,3 @@
-<template>
-  <LayoutDefaultSection :title="'Редактировать пост'">
-    <template #section-controls>
-      <NuxtLink :to="'/admin/post/'"
-                class="link-btn link-btn_outline"
-      >Назад
-      </NuxtLink>
-    </template>
-    <template #section-content>
-      <KitForm v-if="form"
-               :loading="isLoading"
-               submit-label="Сохранить"
-               @submit="submit"
-      >
-        <KitImage :path="form.image"
-                  loading="lazy"
-        />
-        <KitImageUpload label="Изображение"
-                        v-model="form.image"
-        />
-        <KitInput label="Заголовок"
-                  v-model="form.title"
-                  type="text"
-                  maxlength="255"
-                  required
-                  :debounce="100"
-        />
-        <KitInput label="Краткое описание"
-                  v-model="form.description"
-                  as="textarea"
-                  :rows="3"
-                  :debounce="100"
-        />
-        <KitInput label="Контент"
-                  v-model="form.content"
-                  as="textarea"
-                  :rows="12"
-                  required
-                  :debounce="100"
-        />
-        <KitInput
-            :label="'Опубликовано'"
-            type="checkbox"
-            v-model="form.published"
-        />
-      </KitForm>
-      <KitAlert v-if="pending"
-                :type="'success'"
-                :title="`Загрузка данных...`"
-                :text="`...`"
-      />
-      <KitAlert v-if="fetchError"
-                :type="'error'"
-                :title="`Ошибка!`"
-                :text="String(fetchError)"
-      />
-    </template>
-  </LayoutDefaultSection>
-</template>
-
 <script setup lang="ts">
 import type {BlogPost, IPostFormPayload} from '~/types/blog'
 
@@ -118,3 +58,63 @@ onMounted(() => {
   }
 })
 </script>
+
+<template>
+  <LayoutDefaultSection :title="'Редактировать пост'">
+    <template #section-controls>
+      <NuxtLink :to="'/admin/post/'"
+                class="link-btn link-btn_outline"
+      >Назад
+      </NuxtLink>
+    </template>
+    <template #section-content>
+      <KitForm v-if="form"
+               :loading="isLoading"
+               submit-label="Сохранить"
+               @submit="submit"
+      >
+        <KitImage :path="form.image"
+                  loading="lazy"
+        />
+        <KitImageUpload label="Изображение"
+                        v-model="form.image"
+        />
+        <KitInput label="Заголовок"
+                  v-model="form.title"
+                  type="text"
+                  maxlength="255"
+                  required
+                  :debounce="100"
+        />
+        <KitInput label="Краткое описание"
+                  v-model="form.description"
+                  as="textarea"
+                  :rows="3"
+                  :debounce="100"
+        />
+        <KitInput label="Контент"
+                  v-model="form.content"
+                  as="textarea"
+                  :rows="12"
+                  required
+                  :debounce="100"
+        />
+        <KitInput
+            :label="'Опубликовано'"
+            type="checkbox"
+            v-model="form.published"
+        />
+      </KitForm>
+      <KitAlert v-if="pending"
+                :type="'success'"
+                :title="`Загрузка данных...`"
+                :text="`...`"
+      />
+      <KitAlert v-if="fetchError"
+                :type="'error'"
+                :title="`Ошибка!`"
+                :text="String(fetchError)"
+      />
+    </template>
+  </LayoutDefaultSection>
+</template>

@@ -1,13 +1,3 @@
-<template>
-  <NuxtImg class="kit-image"
-           fit="cover"
-           :src="isError ? defaultImage : path"
-           :alt="alt"
-           :loading="loading"
-           @error="handleError"
-  />
-</template>
-
 <script setup lang="ts">
 const props = defineProps({
   path: {
@@ -38,6 +28,16 @@ watch(() => props.path, () => {
   isError.value = false
 })
 </script>
+
+<template>
+  <NuxtImg class="kit-image"
+           fit="cover"
+           :src="isError ? defaultImage : path"
+           :alt="alt"
+           :loading="loading"
+           @error="handleError"
+  />
+</template>
 
 <style scoped>
 .kit-image {

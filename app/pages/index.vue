@@ -1,25 +1,3 @@
-<template>
-  <section>
-    <div class="blog__list scroll"
-         ref="blogListRef"
-    >
-      <PostCard v-for="post in postList"
-                :key="post.id"
-                :post="post"
-      />
-      <p v-if="!pending && !error && !hasMore && postList.length > 0"
-         class="blog__info"
-      >элементов больше нет</p>
-    </div>
-    <KitButton v-if="showScrollTopButton"
-               class="up__btn"
-               aria-label="Прокрутить наверх"
-               text="UP"
-               @click="scrollToTop"
-    />
-  </section>
-</template>
-
 <script setup lang="ts">
 useSeoMeta({
   title: 'Блог - Главная',
@@ -113,7 +91,7 @@ onMounted(async () => {
   if (el) {
     el.addEventListener('scroll', syncBottomState)
     listMutationObserver = new MutationObserver(syncBottomState)
-    listMutationObserver.observe(el, { childList: true, subtree: true })
+    listMutationObserver.observe(el, {childList: true, subtree: true})
   }
 })
 
@@ -136,6 +114,28 @@ watch(searchQuery, async () => {
   await loadMorePosts(true)
 })
 </script>
+
+<template>
+  <section>
+    <div class="blog__list scroll"
+         ref="blogListRef"
+    >
+      <PostCard v-for="post in postList"
+                :key="post.id"
+                :post="post"
+      />
+      <p v-if="!pending && !error && !hasMore && postList.length > 0"
+         class="blog__info"
+      >элементов больше нет</p>
+    </div>
+    <KitButton v-if="showScrollTopButton"
+               class="up__btn"
+               aria-label="Прокрутить наверх"
+               text="UP"
+               @click="scrollToTop"
+    />
+  </section>
+</template>
 
 <style scoped>
 .blog__list {
