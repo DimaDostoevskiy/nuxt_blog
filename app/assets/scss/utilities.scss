@@ -2,6 +2,15 @@
   @for $i from 0 through 16 {
     --spacing-#{$i}: #{$i * 4}px;
   }
+  --width-0: 0;
+  --width-10: 10%;
+  --width-20: 20%;
+  --width-25: 25%;
+  --width-33: 33.333%;
+  --width-50: 50%;
+  --width-66: 66.666%;
+  --width-75: 75%;
+  --width-100: 100%;
 }
 
 $sides: ('t': 'top', 'b': 'bottom', 'l': 'left', 'r': 'right');
@@ -70,4 +79,22 @@ $props: ('m': 'margin', 'p': 'padding');
       }
     }
   }
+}
+
+// Width utilities (по типу margin: scale в :root + классы)
+$width-scale: (0, 10, 20, 25, 33, 50, 66, 75, 100);
+
+@each $n in $width-scale {
+  .w-#{$n} {
+    width: var(--width-#{$n}) !important;
+  }
+}
+
+.w-auto {
+  width: auto !important;
+}
+
+// KitButton: когда wrap с w-100, внутренняя кнопка тянется
+.kit-button__wrap.w-100 .kit-button {
+  width: 100% !important;
 }
