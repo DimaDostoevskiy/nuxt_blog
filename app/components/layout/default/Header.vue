@@ -2,8 +2,6 @@
 import type {IUserCookie} from '../../../types/user'
 
 const route = useRoute()
-const {app: appConfig} = useRuntimeConfig()
-const baseUrl = appConfig.baseURL || '/blog/'
 const cookieUser = useCookie('auth_user')
 const searchQuery = useState<string>('postsSearchQuery', () => '')
 const user = ref<IUserCookie | null>(null)
@@ -19,7 +17,7 @@ onMounted(() => {
         // Если кука уже объект
         user.value = cookieUser.value as IUserCookie
       }
-    } catch (error) {
+    } catch {
       user.value = null
     }
   }
