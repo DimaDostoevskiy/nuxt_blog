@@ -1,5 +1,5 @@
-@use './variables' as *;
-@import './utilities.scss';
+// variables loaded via vite preprocessorOptions.scss.additionalData
+@use './utilities.scss';
 
 // CSS custom properties (from SCSS vars)
 :root {

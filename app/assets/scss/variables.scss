@@ -1,3 +1,5 @@
+@use "sass:string";
+
 // Colors (RGB for opacity support)
 $color-bg-rgb: 10 12 17;
 $color-surface-rgb: 20 24 33;
@@ -14,18 +16,18 @@ $color-accent-rgb: 226 232 240;
 
 // Full color values (for use in SCSS)
 // Space-separated RGB for modern CSS rgb(r g b) syntax
-$color-bg: unquote('rgb(#{$color-bg-rgb})');
-$color-surface: unquote('rgb(#{$color-surface-rgb})');
-$color-surface-2: unquote('rgb(#{$color-surface-2-rgb})');
-$color-text: unquote('rgb(#{$color-text-rgb})');
-$color-muted: unquote('rgb(#{$color-muted-rgb})');
-$color-border: unquote('rgb(#{$color-border-rgb} / 0.14)');
-$color-primary: unquote('rgb(#{$color-primary-rgb})');
-$color-primary-hover: unquote('rgb(#{$color-primary-hover-rgb})');
-$color-danger: unquote('rgb(#{$color-danger-rgb})');
-$color-success: unquote('rgb(#{$color-success-rgb})');
-$color-error: unquote('rgb(#{$color-error-rgb})');
-$color-accent: unquote('rgb(#{$color-accent-rgb})');
+$color-bg: string.unquote('rgb(#{$color-bg-rgb})');
+$color-surface: string.unquote('rgb(#{$color-surface-rgb})');
+$color-surface-2: string.unquote('rgb(#{$color-surface-2-rgb})');
+$color-text: string.unquote('rgb(#{$color-text-rgb})');
+$color-muted: string.unquote('rgb(#{$color-muted-rgb})');
+$color-border: string.unquote('rgb(#{$color-border-rgb} / 0.14)');
+$color-primary: string.unquote('rgb(#{$color-primary-rgb})');
+$color-primary-hover: string.unquote('rgb(#{$color-primary-hover-rgb})');
+$color-danger: string.unquote('rgb(#{$color-danger-rgb})');
+$color-success: string.unquote('rgb(#{$color-success-rgb})');
+$color-error: string.unquote('rgb(#{$color-error-rgb})');
+$color-accent: string.unquote('rgb(#{$color-accent-rgb})');
 
 // Radii
 $radius-md: 16px;
