@@ -35,6 +35,10 @@ const props = defineProps({
     type: String,
     default: 'left',
     validator: v => ['left', 'right'].includes(v)
+  },
+  to: {
+    type: [String, Object],
+    default: null
   }
 })
 
@@ -68,9 +72,29 @@ const clickHandler = (e) => {
   <div class="kit-button__wrap"
        :class="{ 'kit-button__wrap_full': fullWidth }"
   >
-    <button type: props.type
-            disabled: props.disabled
-            props.loading
+    <NuxtLink v-if="to"
+              :to="to"
+              class="kit-button"
+              :class="btnClasses"
+              @click="clickHandler"
+    >
+      <span v-if="loading" class="kit-button__spinner"/>
+      <span v-if="icon && !loading"
+            class="kit-button__icon"
+            :class="{ 'kit-button__icon_right': iconPosition === 'right' }"
+      >{{ icon }}</span>
+      <span v-if="(text || $slots.default) && !loading"
+            class="kit-button__text"
+      >
+        <slot>{{ text }}</slot>
+      </span>
+      <span v-if="iconRight && !loading"
+            class="kit-button__icon kit-button__icon_right"
+      >{{ iconRight }}</span>
+    </NuxtLink>
+    <button v-else
+            :type="type"
+            :disabled="disabled || loading"
             class="kit-button"
             :class="btnClasses"
             @click="clickHandler"
@@ -83,8 +107,8 @@ const clickHandler = (e) => {
       <span v-if="(text || $slots.default) && !loading"
             class="kit-button__text"
       >
-                <slot>{{ text }}</slot>
-            </span>
+        <slot>{{ text }}</slot>
+      </span>
       <span v-if="iconRight && !loading"
             class="kit-button__icon kit-button__icon_right"
       >{{ iconRight }}</span>
@@ -244,6 +268,29 @@ const clickHandler = (e) => {
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0.03em;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    gap: 6px;
+
+    &_sm {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      gap: 4px;
+    }
+
+    &_lg {
+      padding: 12px 24px;
+      font-size: 1rem;
+      gap: 8px;
+    }
+
+    &__icon {
+      font-size: 1.1em;
+    }
   }
 }
 

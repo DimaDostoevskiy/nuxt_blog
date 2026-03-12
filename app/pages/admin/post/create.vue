@@ -65,10 +65,10 @@ const generatePostHandler = async () => {
                  :text="isAutoGenerate ? 'создать' : 'генерировать'"
                  @click="isAutoGenerate = !isAutoGenerate"
       />
-      <NuxtLink :to="'/admin/post/'"
-                class="link-btn link-btn_outline"
-      >назад
-      </NuxtLink>
+      <KitButton to="/admin/post/"
+                 variant="outline"
+                 text="назад"
+      />
     </template>
     <template #section-content>
       <KitForm v-if="form && !isAutoGenerate"

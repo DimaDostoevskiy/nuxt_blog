@@ -116,20 +116,21 @@ watch(searchQuery, async () => {
 </script>
 
 <template>
-  <section>
-    <div class="blog__list scroll"
-         ref="blogListRef"
-    >
-      <PostCard v-for="post in postList"
-                :key="post.id"
-                :post="post"
-      />
-      <p v-if="!pending && !error && !hasMore && postList.length > 0"
-         class="blog__info"
-      >элементов больше нет</p>
-    </div>
+  <section class="blog-list scroll"
+           ref="blogListRef"
+  >
+    <PostCard v-for="post in postList"
+              :key="post.id"
+              :post="post"
+              class="mb-8"
+    />
+    <KitAlert v-if="!pending && !error && !hasMore && postList.length > 0"
+              class="pl-8"
+              title="элементов больше нет"
+              text=""
+    />
     <KitButton v-if="showScrollTopButton"
-               class="up__btn"
+               class="blog-list__up-btn"
                aria-label="Прокрутить наверх"
                text="UP"
                @click="scrollToTop"
@@ -138,23 +139,14 @@ watch(searchQuery, async () => {
 </template>
 
 <style scoped>
-.blog__list {
-  padding-bottom: 100px;
+.blog-list {
+  padding: 24px 24px 100px 24px;
   height: 100vh;
   width: 100%;
   max-width: 100%;
 }
 
-.blog__info {
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.up__btn {
+.blog-list__up-btn {
   position: fixed;
   right: clamp(16px, 4vw, 40px);
   bottom: clamp(16px, 6vh, 40px);

@@ -14,8 +14,7 @@ const props = defineProps({
   }
 })
 
-const {app: appConfig} = useRuntimeConfig()
-const postHref = computed(() => `${appConfig.baseURL || '/blog/'}${props.post.slug}`)
+const postHref = computed(() => `/${props.post.slug}`)
 
 const placeholderImageSrc = 'https://placehold.co/1200x620/222222/fafafa?text=Post+image'
 const isImageBroken = ref(false)
@@ -36,25 +35,31 @@ function handleImageError() {
   isImageBroken.value = true
 }
 </script>
+
 <template>
   <div class="post-card">
     <div class="post-card__media">
-      <img
-          v-if="displayImageSrc && !isImageBroken"
-          class="post-card__media-image"
-          :src="displayImageSrc"
-          :alt="`Изображение к посту: ${post.title}`"
-          loading="lazy"
-          @error="handleImageError"
+      <KitImage v-if="displayImageSrc && !isImageBroken"
+                class="mb-4"
+                :src="displayImageSrc"
+                :alt="`Изображение к посту: ${post.title}`"
+                loading="lazy"
+                @error="handleImageError"
       />
-      <div v-else class="post-card__media-fallback">Нет изображения</div>
-      <a class="post-card__link" :href="postHref">Перейти на страницу</a>
+      <div v-else class="post-card__media-fallback mb-4">Нет изображения</div>
+      <KitButton class="w-100"
+                 :to="postHref"
+                 variant="primary"
+                 size="sm"
+                 text="Перейти на страницу"
+      />
     </div>
     <div class="post-card__body">
       <h2 class="post-card__title">{{ post.title }}</h2>
       <p class="post-card__description">{{ post.description }}</p>
       <div class="post-card__content" v-html="post.content"/>
     </div>
+    <slot name="controls"/>
   </div>
 </template>
 
@@ -70,7 +75,6 @@ function handleImageError() {
   display: grid;
   gap: 10px;
   overflow: hidden;
-  margin: 16px;
   transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
 }
 
@@ -84,13 +88,6 @@ function handleImageError() {
   display: grid;
 }
 
-.post-card__media-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
 .post-card__media-fallback {
   aspect-ratio: 16 / 9;
   display: grid;
@@ -99,32 +96,6 @@ function handleImageError() {
   border-radius: var(--radius-sm);
   color: var(--color-muted);
   font-weight: 600;
-}
-
-.post-card__link {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(250, 250, 250, 0.78);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1;
-  border-radius: 999px;
-  padding: 8px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(0, 0, 0, 0.34);
-  text-decoration: none;
-  transition: color 120ms ease, border-color 120ms ease, background-color 120ms ease;
-}
-
-.post-card__link:hover {
-  color: rgb(var(--color-primary-rgb) / 0.96);
-  border-color: rgb(var(--color-primary-rgb) / 0.45);
-  background: rgba(0, 0, 0, 0.44);
 }
 
 .post-card__body {
@@ -178,6 +149,17 @@ function handleImageError() {
   );
 }
 
+.post-card__footer {
+  width: 100%;
+  height: fit-content;
+  margin: 10px -14px -14px -14px;
+  padding: 12px 14px;
+  background: rgb(var(--color-bg-rgb));
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border-top: 1px solid rgb(var(--color-border-rgb) / 0.2);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 900px) {
   .post-card {
     padding: 12px;
@@ -195,13 +177,6 @@ function handleImageError() {
 }
 
 @media (max-width: 560px) {
-  .post-card__link {
-    right: 8px;
-    bottom: 8px;
-    padding: 7px 9px;
-    font-size: 13px;
-  }
-
   .post-card__title {
     font-size: clamp(18px, 6vw, 22px);
   }

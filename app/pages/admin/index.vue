@@ -15,10 +15,10 @@ useSeoMeta({
         <h2 class="admin-page__card-title">Посты</h2>
         <p class="admin-page__card-desc">Создание, редактирование и удаление записей блога.</p>
         <div class="admin-page__actions">
-          <NuxtLink :to="'/admin/post/'"
-                    class="link-btn link-btn_primary"
-          >Управление постами
-          </NuxtLink>
+          <KitButton to="/admin/post/"
+                     variant="primary"
+                     text="Управление постами"
+          />
         </div>
       </div>
     </template>

@@ -40,7 +40,7 @@ export default defineNitroPlugin(async () => {
 
             await sequelize.authenticate()
             await sequelize.sync(
-                {alter: true, force: false}
+                {alter: true, force: true}
             )
 
         })()

@@ -62,10 +62,10 @@ onMounted(() => {
 <template>
   <LayoutDefaultSection :title="'Редактировать пост'">
     <template #section-controls>
-      <NuxtLink :to="'/admin/post/'"
-                class="link-btn link-btn_outline"
-      >Назад
-      </NuxtLink>
+      <KitButton to="/admin/post/"
+                 variant="outline"
+                 text="Назад"
+      />
     </template>
     <template #section-content>
       <KitForm v-if="form"

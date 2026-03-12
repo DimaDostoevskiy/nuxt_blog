@@ -20,7 +20,6 @@ onMounted(() => {
         user.value = cookieUser.value as IUserCookie
       }
     } catch (error) {
-      console.error('Ошибка парсинга пользователя:', error)
       user.value = null
     }
   }
@@ -30,7 +29,7 @@ onMounted(() => {
 
 <template>
   <header class="layout-header">
-    <a class="layout-header__logo" :href="baseUrl">Logo</a>
+    <NuxtLink class="layout-header__logo" :to="'/'">Logo</NuxtLink>
     <div v-if="isHomePage" class="layout-header__search">
       <KitInput placeholder="Поиск..." v-model="searchQuery"/>
     </div>
@@ -39,7 +38,7 @@ onMounted(() => {
         <div class="layout-header__user-text">{{ user?.name || '' }}</div>
         <div class="layout-header__user-text">{{ user?.role || '' }}</div>
       </div>
-      <KitAvatar size="md"/>
+      <KitAvatar class="ml-4" size="md"/>
     </div>
   </header>
 </template>
@@ -89,6 +88,7 @@ onMounted(() => {
 
 .layout-header__user-info {
   margin: 0 12px 0 0;
+  display: block;
 }
 
 .layout-header__user-text {
@@ -96,6 +96,11 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
+
+  .layout-header__user-info {
+    display: none;
+  }
+
   .layout-header__logo {
     display: none;
   }
