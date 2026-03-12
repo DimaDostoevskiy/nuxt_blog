@@ -110,7 +110,7 @@ export default [
                 multiline: 'ignore'   // Игнорировать в многострочных
             }],
 
-            'vue/html-indent': ['error', 4],
+            'vue/html-indent': 'off',
             'vue/html-closing-bracket-spacing': ['error', {
                 startTag: 'never',
                 endTag: 'never',
