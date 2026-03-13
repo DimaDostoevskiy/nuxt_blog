@@ -26,11 +26,12 @@ export const postsService = {
         const limit = Number(params.limit) || DEFAULT_LIMIT
         const offset = Number(params.offset) || 0
         const searchString = (params.q ?? '').toString().trim().replace(/[%_\\]/g, '\\$&')
-        const publishedWhere = role === 'ADMIN' ? {} : {published: true}
+
+        const where = role === 'ADMIN' ? {} : {published: true}
 
         if (!searchString) {
             return PostModel.findAll({
-                where: publishedWhere,
+                where,
                 order: [['createdAt', 'DESC']],
                 limit,
                 offset,
@@ -41,7 +42,7 @@ export const postsService = {
         return PostModel.findAll({
             where: {
                 [Op.and]: [
-                    publishedWhere,
+                    where,
                     {
                         [Op.or]: [
                             {title: {[Op.like]: likePattern}},

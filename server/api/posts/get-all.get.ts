@@ -4,8 +4,6 @@ import {IUserCookie} from "../../../app/types/user";
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event) as IListPostsParams
-    const authUserRaw = getCookie(event, 'auth_user')
-    const user: IUserCookie = JSON.parse(authUserRaw || '') as IUserCookie
-
-    return await postsService.searchPost(query, user.role)
+    const authUser = getCookie(event, 'auth_user') as IUserCookie | undefined
+    return await postsService.searchPost(query, authUser?.role)
 })
