@@ -22,12 +22,14 @@ const props = defineProps({
 .layout-section {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   width: 100%;
   padding: 1em;
 }
 
 .layout-section__header {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,10 +45,9 @@ const props = defineProps({
 .layout-section__content {
   flex: 1 1 auto;
   min-height: 0;
-  max-height: calc(100vh - 120px);
   overflow-y: auto;
-  display: grid;
-  padding-bottom: 108px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {

@@ -14,8 +14,6 @@ const props = defineProps({
   }
 })
 
-const postHref = computed(() => `/${props.post.slug}`)
-
 const placeholderImageSrc = 'https://placehold.co/1200x620/222222/fafafa?text=Post+image'
 const isImageBroken = ref(false)
 
@@ -31,7 +29,7 @@ watch(() => props.post.id, () => {
   isImageBroken.value = false
 })
 
-function handleImageError() {
+const handleImageError = () => {
   isImageBroken.value = true
 }
 </script>
@@ -47,11 +45,12 @@ function handleImageError() {
                 @error="handleImageError"
       />
       <div v-else class="post-card__media-fallback mb-4">Нет изображения</div>
-      <KitButton class="w-100"
-                 :to="postHref"
-                 variant="primary"
-                 size="sm"
-                 text="Перейти на страницу"
+      <KitButton
+          :to="`/${props.post.slug}`"
+          :fullWidth="true"
+          variant="primary"
+          size="sm"
+          text="Перейти на страницу"
       />
     </div>
     <div class="post-card__body">
@@ -62,7 +61,6 @@ function handleImageError() {
     <slot name="controls"/>
   </div>
 </template>
-
 
 <style scoped>
 .post-card {
@@ -80,7 +78,7 @@ function handleImageError() {
 
 .post-card:hover {
   border-color: rgb(var(--color-primary-rgb) / 0.88);
-  box-shadow: 0 0 0 3px rgb(var(--color-primary-rgb) / 0.24), 0 16px 34px rgb(var(--color-primary-rgb) / 0.3);
+  box-shadow: 3px 3px 3px 3px rgb(var(--color-primary-rgb) / 0.24), 0 16px 34px rgb(var(--color-primary-rgb) / 0.3);
 }
 
 .post-card__media {

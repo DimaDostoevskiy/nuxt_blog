@@ -93,8 +93,3 @@ $width-scale: (0, 10, 20, 25, 33, 50, 66, 75, 100);
 .w-auto {
   width: auto !important;
 }
-
-// KitButton: когда wrap с w-100, внутренняя кнопка тянется
-.kit-button__wrap.w-100 .kit-button {
-  width: 100% !important;
-}
